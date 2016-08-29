@@ -3,7 +3,7 @@
 
 #property indicator_chart_window
 #property indicator_buffers 2
-#property indicator_color1 Lime
+#property indicator_color1 clrYellow
 #property indicator_color2 Red
 
 double G_ibuf_76[];
@@ -77,10 +77,10 @@ int start() {
    int Li_148 = IndicatorCounted(); // Counted bars
    if (Li_148 < 0) return (-1);     // If none then exit
    if (Li_148 > 0) Li_148--;        // Last counted bar will be recounted
-   int Li_0 = Bars - Li_148;        // 
+   int Li_0 = Bars - Li_148 - 1;        // 
    
    // =============== Main loop ==================
-   for (int Li_4 = 0; Li_4 <= Li_0; Li_4++) {
+   for (int Li_4 = 1; Li_4 <= Li_0; Li_4++) {
       Li_8 = Li_4;
       Ld_132 = 0;
       Ld_140 = 0;
@@ -153,7 +153,7 @@ int start() {
       }
       // ======== Conditions for opening a BUY position ===========
       if (Gi_132 == TRUE && Gi_136 == TRUE && Gi_144 == TRUE && Gi_140 == TRUE && Gi_148 == TRUE && Gi_172 != 1) {
-         G_ibuf_76[Li_4] = Low[Li_4] - 1.3 * Ld_132;  // Position of arrow
+         G_ibuf_76[Li_4] = Low[Li_4] + 1.0 * Ld_132;  // Position of arrow
          if (Li_4 <= 2 && Alerts && (!Gi_176)) {
             Alert(Symbol(), " ", Period(), "   BUY");
             Gi_176 = TRUE;
@@ -163,7 +163,7 @@ int start() {
       } else {
       // ======== Conditions for opening a SELL position ===========
          if (Gi_152 == TRUE && Gi_156 == TRUE && Gi_164 == TRUE && Gi_160 == TRUE && Gi_168 == FALSE && Gi_172 != 2) {
-            G_ibuf_80[Li_4] = High[Li_4] + 1.3 * Ld_132;
+            G_ibuf_80[Li_4] = High[Li_4] + 1.0 * Ld_132;
             if (Li_4 <= 2 && Alerts && (!Gi_180)) {
                Alert(Symbol(), " ", Period(), "   SELL");
                Gi_180 = TRUE;
